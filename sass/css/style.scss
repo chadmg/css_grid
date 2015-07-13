@@ -1,0 +1,101 @@
+
+
+/* VARS */
+$background-color: #440099;
+
+$gr-width: 600px;
+$bl-count: 32;
+$bl-padding: 10px;
+$bl-color-border: #889910;
+$gr-background-color: #ff32ae;
+
+$bl-size: ($gr-width - $bl-padding * ($bl-count + 1)) / $bl-count;
+
+/* MIXINS */
+
+@mixin qtransform($s) {
+  -webkit-transform: $s;
+  -moz-transform: $s;
+  -o-transform: $s;
+  -ms-transform: $s;
+  transform: $s;
+}
+
+@mixin qtransition($s) {
+  -webkit-transition: $s;
+  -moz-transition: $s;
+  -o-transition: $s;
+  transition: $s;
+}
+
+
+
+
+body {
+  background-color: $background-color;
+}
+
+
+.body-wrapper {
+  margin-top: 60px;
+  margin-bottom: 70px;
+
+  width: $gr-width;
+  height: $gr-width;
+  margin-left: auto;
+  margin-right: auto;
+
+
+  background-color: #FFFFFF;
+}
+
+#gr {
+  background-color: $gr-background-color;
+
+  width: 100%;
+  height: 100%;
+  padding: $bl-padding;
+
+  position: relative;
+
+  .bl {
+    width: $bl-size;
+    height: $bl-size;
+    margin-bottom: $bl-padding;
+    margin-right: $bl-padding;
+    position: absolute;
+
+    @include qtransition(0.3s ease-in-out);
+    
+    /*
+    &:hover {
+      @include qtransform(translate(20px, 20px));
+    }
+    */
+
+    &.border {
+      background-color: $bl-color-border;
+      
+    }
+
+    @for $x from 1 through $bl-count {
+      @for $y from 1 through $bl-count {
+
+        $zeroOffsetX: $x - 1;
+        $zeroOffsetY: $y - 1;
+        $newX: ($bl-size) * ($zeroOffsetX) + ($bl-padding * $zeroOffsetX);
+        $newY: ($bl-size) * ($zeroOffsetY) + ($bl-padding * $zeroOffsetY);
+
+        &.pos-#{$zeroOffsetX}-#{$zeroOffsetY} {
+          @include qtransform(translate($newX, $newY) scale(2,2));
+        }
+
+      }
+
+    }
+
+  }
+}
+
+
+
