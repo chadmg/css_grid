@@ -1,13 +1,15 @@
-
+/* STYLE.SCSS */
 
 /* VARS */
 $background-color: #440099;
 
 $gr-width: 600px;
-$bl-count: 32;
+$bl-count: 11;
 $bl-padding: 10px;
 $bl-color-border: #889910;
 $gr-background-color: #ff32ae;
+
+$border-radius: 3px;
 
 $bl-size: ($gr-width - $bl-padding * ($bl-count + 1)) / $bl-count;
 
@@ -46,7 +48,7 @@ body {
   margin-right: auto;
 
 
-  background-color: #FFFFFF;
+  
 }
 
 #gr {
@@ -58,12 +60,16 @@ body {
 
   position: relative;
 
+  border-radius: $border-radius;
+
   .bl {
     width: $bl-size;
     height: $bl-size;
     margin-bottom: $bl-padding;
     margin-right: $bl-padding;
     position: absolute;
+
+    border-radius: $border-radius;
 
     @include qtransition(0.3s ease-in-out);
     
@@ -73,9 +79,13 @@ body {
     }
     */
 
-    &.border {
+    &.b {
       background-color: $bl-color-border;
       
+    }
+
+    &.l {
+      background-color: #aeaeae;
     }
 
     @for $x from 1 through $bl-count {
@@ -87,7 +97,7 @@ body {
         $newY: ($bl-size) * ($zeroOffsetY) + ($bl-padding * $zeroOffsetY);
 
         &.pos-#{$zeroOffsetX}-#{$zeroOffsetY} {
-          @include qtransform(translate($newX, $newY) scale(2,2));
+          @include qtransform(translate($newX, $newY) scale(1.01,1.01));
         }
 
       }
